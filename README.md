@@ -87,7 +87,7 @@ To compile and run the application, you must first install the dependencies, whi
 -   Debian/Ubuntu/Kali:
 
     ```
-     apt install build-essential libpcap-dev
+     apt install build-essential libpcap-dev libssl-dev
     ```
 
 -   RHEL/CentOS/Fedora:
