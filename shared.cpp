@@ -293,7 +293,7 @@ int resolve_host(const char *addr, struct sockaddr_in *sockaddr)
 
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET;
-    hints.ai_flags = AI_ALL;
+    hints.ai_flags = 0;
 
     if ((res = getaddrinfo(addr, NULL, &hints, &addrs)) != 0)
     {
@@ -315,7 +315,7 @@ int resolve_host6(const char *addr, struct sockaddr_in6 *sockaddr)
 
     memset(&hints, 0, sizeof(hints));
     hints.ai_family = AF_INET6;
-    hints.ai_flags = AI_ALL;
+    hints.ai_flags = 0;
 
     if ((res = getaddrinfo(addr, NULL, &hints, &addrs)) != 0)
     {
