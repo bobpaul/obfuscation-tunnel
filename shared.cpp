@@ -342,11 +342,11 @@ void print_help(char* argv[])
     printf("   -h, --help\tDisplays this message.\n");
     printf("\nTCP-specific arguments:\n\n");
     printf("   -e\t\tType of encoding to use for the length header:\n   \t\t  v - 7-bit encoded variable-length header (Default)\n   \t\t  s - 2-byte unsigned short\n   \t\t  n - None (Not recommended)\n");
-    printf("\nICMP/ICMPv6-specific arguments:\n\n");
 #if HAVE_PCAP
+    printf("\nICMP/ICMPv6-specific arguments:\n\n");
     printf("   -p [if]\tUse PCAP for inbound, highly recommended.\n   \t\t  Optional value, defaults to default gateway otherwise.\n");
-#endif
     printf("   -x\t\tExpect identifier and sequence randomization.\n   \t\t  Not recommended, see documentation for pros and cons.\n");
+#endif
     printf("\nDNS-specific arguments:\n\n");
     printf("   -f\t\tBase32-encode data and fragment labels on 60-byte boundaries.\n");
     printf("   -d domain\tOptional domain name to act as the authoritative resolver for.\n");
