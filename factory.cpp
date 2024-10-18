@@ -6,7 +6,7 @@
 #include "dtls_server.cpp"
 #include "tcp_client.cpp"
 #include "tcp_server.cpp"
-#if HAVE_PCAP
+#if USE_ICMP
 #include "icmp_client.cpp"
 #include "icmp_server.cpp"
 #include "icmp6_client.cpp"
@@ -49,20 +49,20 @@ transport_base* create_transport(int protocol, struct sockaddr_in *address, bool
 #endif
 
         case PROTO_ICMP:
-#if HAVE_PCAP
+#if USE_ICMP
             if (server) return new icmp_server(*address, session);
             else        return new icmp_client(*address, session);
 #else
-            fprintf(stderr, "This version was not compiled with PCAP support.\n");
+            fprintf(stderr, "This version was not compiled with ICMP support.\n");
             return nullptr;
 #endif
 
         case PROTO_ICMP6:
-#if HAVE_PCAP
+#if USE_ICMP
             if (server) return new icmp6_server(*(struct sockaddr_in6*)address, session);
             else        return new icmp6_client(*(struct sockaddr_in6*)address, session);
 #else
-            fprintf(stderr, "This version was not compiled with PCAP support.\n");
+            fprintf(stderr, "This version was not compiled with ICMP support.\n");
             return nullptr;
 #endif
         
