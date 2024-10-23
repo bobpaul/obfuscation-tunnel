@@ -29,6 +29,9 @@
 #ifndef HAVE_PCAP
     #define HAVE_PCAP 1
 #endif
+#ifndef USE_ICMP
+    #define USE_ICMP 1
+#endif
 #ifndef HAVE_TLS
     #define HAVE_TLS 1
 #endif
@@ -333,7 +336,11 @@ int resolve_host6(const char *addr, struct sockaddr_in6 *sockaddr)
 void print_help(char* argv[])
 {
     printf("usage: %s -l proto:addr:port -r proto:addr:port [args]\narguments:\n\n", argv[0]);
+#if USE_ICMP
     printf("   -l endpoint\tLocal listening protocol, address and port.\n   \t\t  Example: tcp:127.0.0.1:80 / icmp6:[::1]\n   \t\t  Supported protocols: udp, dtls, tcp, tls, icmp, imcp6.\n");
+#else
+    printf("   -l endpoint\tLocal listening protocol, address and port.\n   \t\t  Example: tcp:127.0.0.1:80\n   \t\t  Supported protocols: udp, dtls, tcp, tls.\n");
+#endif
     printf("   -r endpoint\tRemote host to tunnel packets to.\n");
     printf("   -o [mode]\tEnable packet obfuscation. Possible values:\n   \t\t  header - Simple generic header obfuscation (Default)\n   \t\t  xor - XOR packet obfuscation with rolling key\n");
     printf("   -k key\tSpecifies a key for the obfuscator module.\n");
@@ -343,11 +350,13 @@ void print_help(char* argv[])
     printf("   -h, --help\tDisplays this message.\n");
     printf("\nTCP-specific arguments:\n\n");
     printf("   -e\t\tType of encoding to use for the length header:\n   \t\t  v - 7-bit encoded variable-length header (Default)\n   \t\t  s - 2-byte unsigned short\n   \t\t  n - None (Not recommended)\n");
+#if USE_ICMP
     printf("\nICMP/ICMPv6-specific arguments:\n\n");
 #if HAVE_PCAP
     printf("   -p [if]\tUse PCAP for inbound, highly recommended.\n   \t\t  Optional value, defaults to default gateway otherwise.\n");
 #endif
     printf("   -x\t\tExpect identifier and sequence randomization.\n   \t\t  Not recommended, see documentation for pros and cons.\n");
+#endif
     printf("\nDNS-specific arguments:\n\n");
     printf("   -f\t\tBase32-encode data and fragment labels on 60-byte boundaries.\n");
     printf("   -d domain\tOptional domain name to act as the authoritative resolver for.\n");

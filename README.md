@@ -113,9 +113,7 @@ make
 If you wish to build without libpcap:
 
 * Skip the installation of the `libpcap` dependency.
-* Open the `Makefile` file in your editor,
-* Find the `CXXFLAGS` line (should be the first),
-* Replace the flags `-DHAVE_PCAP=1 -lpcap` with `-DHAVE_PCAP=0`
+* `make HAVE_PCAP=0`
 
 ## Tunneling VPN traffic
 

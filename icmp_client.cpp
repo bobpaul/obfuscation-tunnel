@@ -16,10 +16,12 @@ private:
 #endif
 
 public:
+#if HAVE_PCAP
     icmp_client(struct sockaddr_in remote_addr, struct session* session)
         : transport_base(session->verbose), icmp_base(session->random_id), pcap(session->pcap), cap_dev(session->cap_dev), remote_addr(remote_addr)
     {
     }
+#endif
 
     icmp_client(struct sockaddr_in remote_addr, bool pcap = false, char *cap_dev = NULL, bool random_id = false, bool verbose = false)
         : transport_base(verbose), icmp_base(random_id), pcap(pcap), cap_dev(cap_dev), remote_addr(remote_addr)
