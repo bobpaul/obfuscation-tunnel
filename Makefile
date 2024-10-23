@@ -2,11 +2,11 @@ HAVE_PCAP := 1
 USE_ICMP := 1
 
 # Currently the only reason for PCAP is ICMP
-ifeq ($(HAVE_PCAP),1)
-	LIBPCAP := -lpcap
-endif
 ifneq ($(USE_ICMP),1)
 	override HAVE_PCAP := 0
+	ifeq ($(HAVE_PCAP),1)
+		LIBPCAP := -lpcap
+	endif
 endif
 
 #CXXFLAGS = -ggdb -fsanitize=address -fno-omit-frame-pointer -std=c++14 -Wall -Wextra -Ofast -DHAVE_PCAP=$(HAVE_PCAP) -DUSE_ICMP=$(USE_ICMP) -I/usr/local/opt/openssl/include -L/usr/local/opt/openssl/lib
